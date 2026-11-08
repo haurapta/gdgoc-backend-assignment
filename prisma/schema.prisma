@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// -------------------------------------------------------------
+// Model Data sesuai Studi Kasus GDGoC UNSRI
+// -------------------------------------------------------------
+
+model User {
+  id            String       @id @default(uuid())
+  name          String
+  email         String       @unique
+  password_hash String
+  role          String       @default("Member") // Lead, Division Head, Member
+  created_at    DateTime     @default(now())
+  updated_at    DateTime     @updatedAt
+  deleted_at    DateTime?    
+  
+  attendances   Attendance[] 
+}
+
+model Event {
+  id          String       @id @default(uuid())
+  title       String
+  description String?
+  date        DateTime
+  quota       Int
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
+
+  attendances Attendance[] 
+}
+
+model Attendance {
+  id            String   @id @default(uuid())
+  event_id      String
+  user_id       String
+  check_in_time DateTime @default(now())
+
+  event Event @relation(fields: [event_id], references: [id])
+  user  User  @relation(fields: [user_id], references: [id])
+
+  @@unique([event_id, user_id])
+}
+
+model AuditLog {
+  id           String   @id @default(uuid())
+  action       String   
+  performed_by String   
+  target_id    String?  
+  timestamp    DateTime @default(now())
+}
