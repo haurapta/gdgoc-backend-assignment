@@ -17,5 +17,5 @@ Repositori ini berisi REST API untuk sistem manajemen Core Team dan Event GDGoC 
 
 ### 1. Clone Repositori
 ```bash
-git clone [https://github.com/USERNAME_ANDA/gdgoc-backend-assignment.git](https://github.com/USERNAME_ANDA/gdgoc-backend-assignment.git)
+git clone [https://github.com/haurapta/gdgoc-backend-assignment.git](https://github.com/haurapta/gdgoc-backend-assignment.git)
 cd gdgoc-backend-assignment
